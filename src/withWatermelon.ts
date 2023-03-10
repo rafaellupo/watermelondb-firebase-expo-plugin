@@ -45,7 +45,7 @@ function setAppDelegate(config: ExportedConfigWithProps) {
   return withDangerousMod(config, [
     "ios",
     async (config) => {
-      const filePath = getPlatformProjectFilePath(config, 'AppDelegate.h')
+      const filePath = getPlatformProjectFilePath(config, "AppDelegate.h");
       const contents = await fs.readFile(filePath, "utf-8");
 
       let updated =
@@ -69,7 +69,7 @@ function setWmelonBridgingHeader(config: ExportedConfigWithProps) {
   return withDangerousMod(config, [
     "ios",
     async (config) => {
-      const filePath = getPlatformProjectFilePath(config, 'wmelon.swift')
+      const filePath = getPlatformProjectFilePath(config, "wmelon.swift");
       const contents = `
 //
 //  water.swift
@@ -106,6 +106,24 @@ const withCocoaPods = (config: ExportedConfigWithProps) => {
         const patchKey = "post_install";
         const slicedContent = contents.split(patchKey);
         slicedContent[0] += `\n
+
+  # In order to Watermelon work with UseFrameworks (Firebase for example), we need to add this code
+  $static_framework = [ 
+    'WatermelonDB',
+      'simdjson',
+  ]
+  pre_install do |installer|
+    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+      installer.pod_targets.each do |pod|
+        if $static_framework.include?(pod.name)
+          def pod.build_type;
+          Pod::BuildType.static_library # >= 1.9
+        end
+      end
+    end
+  end
+  #End Watermelon with Firebase Code Add
+  
   pod 'WatermelonDB', :path => '../node_modules/@nozbe/watermelondb'
   pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi', :modular_headers => true
   pod 'simdjson', path: '../node_modules/@nozbe/simdjson'\n\n  `;
@@ -156,13 +174,17 @@ function isWatermelonDBInstalled(projectRoot: string) {
   return resolved ? path.dirname(resolved) : null;
 }
 
-function getPlatformProjectFilePath(config: ExportedConfigWithProps, fileName: string) {
-  const projectName = config.modRequest.projectName || config.name.replace(/[- ]/g, '')
+function getPlatformProjectFilePath(
+  config: ExportedConfigWithProps,
+  fileName: string
+) {
+  const projectName =
+    config.modRequest.projectName || config.name.replace(/[- ]/g, "");
   return path.join(
     config.modRequest.platformProjectRoot,
     projectName,
     fileName
-  )
+  );
 }
 
 // @ts-ignore

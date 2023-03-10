@@ -1,16 +1,17 @@
 {
-  "name": "@morrowdigital/watermelondb-expo-plugin",
+  "name": "@rafaellupo/watermelondb-firebase-expo-plugin",
   "version": "2.1.0",
   "main": "build/withWatermelon.js",
   "types": "build/withWatermelon.d.ts",
   "license": "MIT",
-  "git": "https://github.com/morrowdigital/watermelondb-expo-plugin.git",
-  "homepage": "https://github.com/morrowdigital/watermelondb-expo-plugin#readme",
+  "git": "https://github.com/rafaellupo/watermelondb-firebase-expo-plugin.git",
+  "homepage": "https://github.com/rafaellupo/watermelondb-firebase-expo-plugin#readme",
   "bugs": {
-    "url": "https://github.com/morrowdigital/watermelondb-expo-plugin/issues"
+    "url": "https://github.com/rafaellupo/watermelondb-firebase-expo-plugin/issues"
   },
   "keywords": [
     "watermelondb",
+    "firebase",
     "expo-plugin",
     "expo"
   ],
@@ -33,13 +34,14 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
   },
-  "description": "Config plugin to auto configure `@nozbe/watermelondb`",
+  "description": "Config plugin to auto configure `@nozbe/watermelondb` with Firebase support",
   "directories": {
     "example": "example"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/morrowdigital/watermelondb-expo-plugin.git"
+    "url": "git+https://github.com/rafaellupo/watermelondb-firebase-expo-plugin.git"
   },
-  "author": "Morrow"
+  "author": "Morrow / Temporarily patched by Rafael Lupo",
+  "private": false
 }
