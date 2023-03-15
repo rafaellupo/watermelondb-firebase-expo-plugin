@@ -1,4 +1,4 @@
-# watermelon-db-plugin 🍉
+# watermelon-db-plugin (With Firebase support) 🍉
 
 Config plugin to auto configure `@nozbe/watermelondb`
 This is a fork from `@morrowdigital/watermelondb-expo-plugin` with a Podfile extra code that allows you to use watermelondb with Firebase. (Fixes useFrameworks bugs when building)
